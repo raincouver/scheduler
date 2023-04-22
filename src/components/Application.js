@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "components/Application.scss";
 import "components/Appointment/styles.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
+import axios from "axios";
+import { response } from "express";
 
 const days = [
   {
@@ -63,9 +65,23 @@ const appointments = {
 
 
 export default function Application(props) {
-  const [day, setDay] = useState('Monday');
 
-  console.log(day);
+  const [day, setDay] = useState('Monday');
+  const [days, setDays] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/days")
+      .then((response) => {
+        console.log(response);
+        setDays(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        console.log(error.response.data);
+      });
+  },[response])
 
   return (
     <main className="layout">
