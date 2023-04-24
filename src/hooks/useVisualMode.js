@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
@@ -8,7 +8,8 @@ export default function useVisualMode(initial) {
     if (status !== true) {
       setHistory(prev => [...prev, destination]);
     }
-      return setMode(destination); 
+    setMode(destination);
+      return mode;
 
   }
 
