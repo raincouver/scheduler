@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import "components/Appointment/styles.scss";
 import Header from "./Header";
 import Empty from "./Empty";
@@ -9,7 +9,7 @@ import Confirm from "./Confirm";
 import Status from "./Status";
 import useVisualMode from "hooks/useVisualMode";
 
- 
+
 export default function Appointment(props) {
 
   const EMPTY = "EMPTY";
@@ -19,33 +19,35 @@ export default function Appointment(props) {
   const CONFIRM = "CONFIRM";
   const EDIT = "EDIT";
   const DELETING = "DELETING";
+  const ERROR_DELETE = "ERROR_DELETE";
+  const ERROR_SAVE = "ERROR_SAVE";
 
-  const {id, time, interview, interviewers, bookInterview, cancelInterview} = props;
+  const { id, time, interview, interviewers, bookInterview, cancelInterview } = props;
 
 
   function save(name, interviewer) {
 
     const interview = {
-      student : name,
+      student: name,
       interviewer
     };
     transition(SAVING);
 
     bookInterview(id, interview)
-      .then(()=> transition(SHOW))
-      // .catch(())
+      .then(() => transition(SHOW))
+      .catch(error => transition(ERROR_SAVE, true));
   }
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
-  function remove() {
-    transition(DELETING,true);
+  function destory() {
+    transition(DELETING, true);
 
     cancelInterview(id)
-      .then(()=> transition(EMPTY))
-      // .catch(())
+      .then(() => transition(EMPTY))
+      .catch(error => transition(ERROR_DELETE, true));
   }
 
 
@@ -68,7 +70,7 @@ export default function Appointment(props) {
         <Form
           interviewers={interviewers}
           interviewer={interview.interviewer.id}
-          onSave={()=>save}
+          onSave={() => save}
           onCancel={back}
           student={interview.student}
         />
@@ -78,7 +80,7 @@ export default function Appointment(props) {
       {mode === CREATE && (
         <Form
           interviewers={interviewers}
-          onSave={()=>save}
+          onSave={() => save}
           onCancel={back}
         />
       )
@@ -87,7 +89,7 @@ export default function Appointment(props) {
       {mode === SAVING && (
         <Status
           message={"Saving"}
-          // onComplete={() => transition(SHOW)}
+        // onComplete={() => transition(SHOW)}
         />
       )
       }
@@ -95,7 +97,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm
           message={"Are you sure you want to delete?"}
-          onConfirm={() => remove}
+          onConfirm={() => destory}
           onCancel={back}
         />
       )
@@ -104,7 +106,23 @@ export default function Appointment(props) {
       {mode === DELETING && (
         <Status
           message={"Deleting"}
-          // onComplete={() => transition(EMPTY)}
+        // onComplete={() => transition(EMPTY)}
+        />
+      )
+      }
+
+      {mode === ERROR_DELETE && (
+        <Error
+          message={"Could not delete appointment"}
+          onClose={back}
+        />
+      )
+      }
+
+      {mode === ERROR_SAVE && (
+        <Error
+          message={"Could not save appointment"}
+          onClose={back}
         />
       )
       }
