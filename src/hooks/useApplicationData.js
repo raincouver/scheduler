@@ -20,6 +20,19 @@ Promise.all([
   setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
 });
 
+function spotsCount(state) {
+  let spotsNumber = 0;
+  for (let i of state.days.appointments) {
+    if (state.appointments.interview[i] === null){
+      spotsNumber+=1;
+    }
+  }
+  return spotsNumber;
+
+}
+
+
+
 function bookInterview(id, interview) {
   console.log(id, interview);
 
@@ -35,11 +48,11 @@ function bookInterview(id, interview) {
 
   return axios.put(`/api/appointments/:${id}`, { interview })
   .then(() => {
-
+    const days = spotsCount(state);
     setState((prev) => ({
       ...prev,
       appointments,
-      // days
+      days
     }));
   });
 
@@ -58,13 +71,13 @@ function cancelInterview(id) {
     [id]: appointment
   };
 
-  return axios.delete(`/api/appointments/:${id}`)
+  return axios.delete(`/api/appointments/${id}`)
   .then(() => {
-
+    const days = spotsCount(state);
     setState((prev) => ({
       ...prev,
       appointments,
-      // days
+      days
     }));
   });
 

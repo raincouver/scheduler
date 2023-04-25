@@ -97,7 +97,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm
           message={"Are you sure you want to delete?"}
-          onConfirm={() => destory}
+          onConfirm={destory}
           onCancel={back}
         />
       )
