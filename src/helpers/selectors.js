@@ -49,7 +49,7 @@ export function getInterviewersForDay(state, day) {
     return result;
 
   }
-console.log(filteredDays);
+
   for (let i of filteredDays[0].interviewers) {
 
     let x = state.interviewers[i];
