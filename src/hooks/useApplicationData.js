@@ -46,7 +46,7 @@ function bookInterview(id, interview) {
     [id]: appointment
   };
 
-  return axios.put(`/api/appointments/:${id}`, { interview })
+  return axios.put(`/api/appointments/${id}`, { interview })
   .then(() => {
     const days = spotsCount(state);
     setState((prev) => ({
@@ -54,6 +54,7 @@ function bookInterview(id, interview) {
       appointments,
       days
     }));
+    return;
   });
 
 };

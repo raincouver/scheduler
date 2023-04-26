@@ -43,32 +43,19 @@ export function getInterviewersForDay(state, day) {
   const filteredDays = state.days.filter(eachDay => eachDay.name === day);
 
   let result = [];
-  let resultInterviewers = [];
 
   if (filteredDays.length === 0) {
 
     return result;
 
   }
+console.log(filteredDays);
+  for (let i of filteredDays[0].interviewers) {
 
-  for (let i of filteredDays[0].appointments) {
+    let x = state.interviewers[i];
 
-    let x = state.appointments[i];
+    result.push(x);
 
-    if (x.interview) {
-      let interviewer = x.interview.interviewer;
-      resultInterviewers.push(interviewer);
-    }
-
-  }
-
-  const uniqueInterviewers = resultInterviewers.filter((value, index, self) => self.indexOf(value) === index);
-
-  for (let i of uniqueInterviewers) {
-
-    let y = state.interviewers[i];
-
-    result.push(y);
   }
 
   return result;
