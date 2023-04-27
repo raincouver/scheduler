@@ -17,16 +17,16 @@
 
 ## Demo
 ### Add an appointment
-https://github.com/raincouver/scheduler/blob/master/public/gifs/add_appointment.gif
+![](https://github.com/raincouver/scheduler/blob/master/public/gifs/add_appointment.gif)
 
 ### Edit an appointment
-https://github.com/raincouver/scheduler/blob/master/public/gifs/edit.gif
+![](https://github.com/raincouver/scheduler/blob/master/public/gifs/edit.gif)
 
 ### Delete an appointment
-https://github.com/raincouver/scheduler/blob/master/public/gifs/delete.gif
+![](https://github.com/raincouver/scheduler/blob/master/public/gifs/delete.gif)
 
 ### Error Handling
-https://github.com/raincouver/scheduler/blob/master/public/gifs/error_handling.gif
+![](https://github.com/raincouver/scheduler/blob/master/public/gifs/error_handling.gif)
 
 
 ## Setup
