@@ -73,12 +73,12 @@ export function getInterviewersForDay(state, day) {
 
 export function updateSpots(state, appointments) {
   const index = state.days.findIndex((d) => d.name === state.day);
-
+  console.log('index', index);
   const dayObj = state.days[index];
-
+  console.log('dayObj', dayObj);
   let spots = 0;
 
-  for (const id of dayObj.appointments) {
+  for (let id of dayObj.appointments) {
     if (!appointments[id].interview) {
       spots++;
     }
