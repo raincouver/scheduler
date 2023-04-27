@@ -61,3 +61,31 @@ export function getInterviewersForDay(state, day) {
   return result;
 
 };
+
+
+
+/* Updates appointment spots remaining 
+ *
+ * @param {object} state represents the state of the application.
+ * @param {object} appointments represents an object containing all the appointments of the day.
+ * @return {array}  returns a newDays array which shows the updated number of spots available for each day.
+ */
+
+export function updateSpots(state, appointments) {
+  const index = state.days.findIndex((d) => d.name === state.day);
+
+  const dayObj = state.days[index];
+
+  let spots = 0;
+
+  for (const id of dayObj.appointments) {
+    if (!appointments[id].interview) {
+      spots++;
+    }
+  }
+
+  const newDays = [...state.days];
+  const day = {...dayObj, spots};
+  newDays[index] = day;
+  return newDays;
+};
