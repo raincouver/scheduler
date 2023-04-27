@@ -15,7 +15,18 @@
 - When the user presses the close button of the error they are returned to the Form or Show view (skipping Status and Confirm).
 - The application makes API requests to load and persist data. We do not lose data after a browser refresh.
 
-### Demo
+## Demo
+### Add an appointment
+https://github.com/raincouver/scheduler/blob/master/public/gifs/add_appointment.gif
+
+### Edit an appointment
+https://github.com/raincouver/scheduler/blob/master/public/gifs/edit.gif
+
+### Delete an appointment
+https://github.com/raincouver/scheduler/blob/master/public/gifs/delete.gif
+
+### Error Handling
+https://github.com/raincouver/scheduler/blob/master/public/gifs/error_handling.gif
 
 
 ## Setup
